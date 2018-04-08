@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import Person from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
+import Radium, { StyleRoot } from 'radium';
+import person from './../Components/Persons/Persons';
 
 class App extends Component {
   state ={
@@ -25,8 +28,7 @@ class App extends Component {
 
     const person ={ ...this.state.persons[personIndex]};
     person.name = event.target.value;
-    const persons = [...this.state.persons];
-    
+    const persons = [...this.state.persons];    
     person[personIndex] = person;
     this.setState({ persons: [{ name: "Daniel", age: "30" }, { name: "rosie", age: 27 }, { name: event.target.value , age: 2 }] })
   }
@@ -46,29 +48,34 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-          {this.state.persons.map((person,index) =>{
-            return <Person 
-            click={()=>this.deletePersonHandler(index)} 
-            name={person.name}
-            key={person.id}  
-            age={person.age} 
-            changed = {(event)=>this.nameChangedHandler(event,person.id)}/>
-          })}
-          {/* <Person name={this.state.persons[0].name} age={this.state.persons[0].age} >My Hobbies : Surfing</Person>
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={this.switchNameHandler.bind(this, 'Max!')} />
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} /> */}
+         <Person persons={this.state.persons} 
+         clicked={this.deletePersonHandler}
+         changed={this.nameChangedHandler}
+         />
         </div> 
-      )
+      );
+      //dynamicly change the css by nesting it inside the function that you want it to change in
+      style.backgroundColor = 'red';
+      style[':hover']={
+        backgroundColor:'salmon',
+      }
     }
+    
+   
     return (
+      <StyleRoot>
       <div className="App">
-        <h1>Hi, i am a react app</h1>
-        <button onClick={this.togglePersonsHandler}>Switch Name</button>
-        {persons}
+       <Cockpit
+       showPersons={this.state.showPersons}
+       persons={this.state.persons}
+       clicked={this.togglePersonsHandler}
+       />
+       
          
       </div>
+      </StyleRoot>
     );    
 }
 }
 
-export default App;
+export default Radium(App);
