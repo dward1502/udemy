@@ -3,7 +3,7 @@ import Button from '../../UI/Button/Button';
 import { Component } from 'react';
 
 class OrderSummary extends Component {   
-   componentWillUpdate(){
+   componentDidUpdate(){
       console.log('[OrderSummary] will update');
    }
    render(){
