@@ -1,0 +1,54 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\dward\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\dward\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\nodejs;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\Users\dward\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\dward\AppData\Local\Programs\Python\Python36;C:\Users\dward\AppData\Local\Programs\Python\Launcher;C:\Users\dward\AppData\Local\Microsoft\WindowsApps;C:\Users\dward\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\Heroku\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\dward\AppData\roaming\Python\Python36\scripts
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "react-complete-guide",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "react": "^16.0.0",
+      "react-dom": "^16.0.0",
+      "react-scripts": "1.0.13"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c react-scripts start
+  Directory: C:\Users\dward\code\udemy\React\http--01-starting-setup
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Users\dward\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Users\dward\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Users\dward\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:925:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)

@@ -1,10 +1,10 @@
 import React from 'react';
 import img from '../../Assets/Images/burger-logo.png';
-import  './logo.css';
+import classes from  './logo.css';
 
 const Logo = (props) => {
    return (
-      <div className='Logo'>
+      <div className={classes.Logo}>
          <img src={img} alt='MyBurger'/>
       </div>
    )
