@@ -1,0 +1,24 @@
+*,
+::before,
+::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+/* sets value of html at 10px and than 1 rem equals 10 px 
+rem allows for media query styling to be more efficient change the html font-size you can change all of the styles with rem*/
+
+/* default font size is 16px */
+
+html {
+   font-size: 62.5%;
+}
+
+body {
+   font-family: "Lato", sans-serif;
+   font-weight: 400;
+   line-height: 1.7;
+   color: $color-grey-dark;
+   padding: 3rem;
+}
