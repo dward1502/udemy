@@ -127,12 +127,23 @@
    font-size: 1.4rem;
    list-style: none;
    margin-top: 3.5rem;
+@media only screen and (max-width: $bp-medium) {
+   display: flex;
+   margin: 0;
+}
+   
    
    &__item {
       position: relative;
 
       &:not(:last-child){
          margin-bottom: .5rem;
+          @media only screen and (max-width: $bp-medium) {
+             margin: 0;
+          }
+      }
+      @media only screen and (max-width: $bp-medium) {
+          flex: 1;
       }
    }
 
@@ -174,6 +185,10 @@
       outline: none;
       display:flex;
       align-items: center;
+      @media only screen and (max-width: $bp-medium) {
+          justify-content: center;
+          padding: 2rem;
+      }
    }
 
    &__link:hover {
@@ -202,6 +217,10 @@
    color: var(--color-grey-light-4);
    text-align: center;
    padding: 2.5rem;
+   @media only screen and (max-width: $bp-medium) {
+       display: none;
+   
+   }
 
 }
 
@@ -350,11 +369,8 @@
         //newer browsers - mask
         background-color: var(--color-primary);
         -webkit-mask-image: url(../img/chevron-thin-right.svg);
-        -webkit-mask-size: cover;
-
-        
+        -webkit-mask-size: cover;        
     }
-
 }
 
 //////////////////////////
@@ -368,7 +384,7 @@
     
 
     &__count{
-margin-right: auto;
+        margin-right: auto;
     }
     &__friends {
         
@@ -394,6 +410,10 @@ margin-right: auto;
      box-shadow: 0 2rem 5rem rgba(0, 0, 0, .06);
      position: relative;
      overflow: hidden;
+     @media only screen and (max-width: $bp-medium) {
+         padding: 2rem;
+         margin-bottom: 3rem;
+     }
 
     &__text{
         margin-bottom: 2rem;
