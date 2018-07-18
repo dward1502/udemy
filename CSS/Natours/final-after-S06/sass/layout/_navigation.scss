@@ -16,7 +16,7 @@
         text-align: center;
         cursor: pointer;
 
-        @include respond(tab-port) {
+        @include respond(navi) {
             top: 4rem;
             right: 4rem;
         }
