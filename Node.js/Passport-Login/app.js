@@ -7,13 +7,15 @@ const express = require('express'),
     flash = require('connect-flash'),
     session = require('express-session'),
     passport = require('passport'),
+    morgan = require('morgan'),
     mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/loginApp');
-const db = mongoose.connection;
+
+require('./controllers/passport');
 
 const routes = require('./routes/index');
-const users = require('./routes/users');
+const users = require('./routes/auth');
 //Init App
 const app = express();
 //View Engine
@@ -22,6 +24,7 @@ app.engine('handlebars', exphbs({defaultLayout:'layout'}));
 app.set('view engine', 'handlebars');
 
 //Bodyparser middleware
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
@@ -66,7 +69,7 @@ app.use((req,res,next) => {
     next();
 });
 app.use('/', routes);
-app.use('/users', users); 
+app.use('/auth', users); 
 
 app.set('port', (process.env.PORT || 3000));
 
