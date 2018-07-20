@@ -87,7 +87,14 @@ router.post('/login', passport.authenticate('local',{successRedirect:'/',failure
     // let password = req.body.password;
     // req.checkBody('username', 'Username is required').notEmpty();
     // req.checkBody('password', 'Password is required').notEmpty();
-
 });
+
+router.get('/auth/facebook', passport.authenticate('facebook', {
+    scope:['public_profile', 'email']
+}));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect:'/login'
+}));
 
 module.exports = router;
