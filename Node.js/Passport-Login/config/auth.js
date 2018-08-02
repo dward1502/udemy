@@ -9,12 +9,12 @@ module.exports = {
   "google": {
     "client_id": "229796769705-v8ri7aqhactbgrahhk9vtv0lbe45iksu.apps.googleusercontent.com",
     "client_secret": "GUDWZrSMjrbiikEXAV26SYmG",
-    "callback": "http://127.0.0.1:1337auth/google/callback"
+    "callback": "http://127.0.0.1:1337"
   },
   "twitter": {
     "consumer_key": "2rJSJ1HOy9seWVekoxpvMPZ0e",
     "consumer_secret": "j3ci8qpo0aehGO7h5v2AQfaWwEe8ndsSrBP7Wqw8kQbcgEuh2i",
-    "callback": "http://127.0.0.1:1337auth/twitter/callback"
+    "callback": "http://127.0.0.1:1337"
   },
   "github": {
     "client_id": "9f1e4f6ff10a36048fd3",

@@ -1,0 +1,15 @@
+{    
+"name": "long name of app (splashscreen)",
+ "short_name": "short name of app",
+" start_url": "which page to load on startup",
+"scope":"which pages are included in PWA experience",
+"display":"should it look like a standalone app",
+"background_color":"backgroun whilst loading & on splashscreen",
+"theme_color":"theme color",
+"description":"description of application",
+"dir":"read direction of your app",
+"lang":"main language of app",
+"orientation":"set(and enforce) default orientation",
+"icons":"allows to configure set of icons where browser picks best fitting ones"
+
+}
