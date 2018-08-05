@@ -1,5 +1,7 @@
 //caches overall cache storage
 //cache single storage
+importScripts("/src/js/idb.js");
+importScripts("/src/js/utility.js");
 var CACHE_STATIC_NAME = "static-v2";
 var CACHE_DYNAMIC_NAME = "dynamic-v2";
 var STATIC_FILES = [
@@ -9,6 +11,7 @@ var STATIC_FILES = [
   "/src/js/app.js",
   "/src/js/feed.js",
   "/src/js/fetch.js",
+  "/src/js/idb.js",
   "/src/js/promise.js",
   "/src/js/material.min.js",
   "/src/css/app.css",
@@ -60,15 +63,23 @@ function isInArray(string, array) {
 
 //cache then network with offline mode
 self.addEventListener("fetch", function(event) {
+  //change url to a firebase url with a preset data
   var url = "https://httpbin.org/get";
   if (event.request.url.indexOf(url) > -1) {
     event.respondWith(
-      caches.open(CACHE_DYNAMIC_NAME).then(function(cache) {
-        return fetch(event.request).then(function(res) {
-          //       trimCache(CACHE_DYNAMIC_NAME,3);
-          cache.put(event.request, res.clone());
-          return res;
-        });
+      fetch(event.request).then(function(res) {
+        var cloneRes = res.clone();
+        clearAllData("posts")
+          .then(function() {
+            return cloneRes.json();
+          })
+          .then(function(data) {
+            for (var key in data) {
+              writeData("posts", data[key]);
+            }
+          });
+        //       trimCache(CACHE_DYNAMIC_NAME,3);
+        return res;
       })
     );
   } else if (isInArray(event.request.url, STATIC_FILES)) {
@@ -172,3 +183,87 @@ self.addEventListener("fetch", function(event) {
 //     })
 //   );
 // });
+
+self.addEventListener("sync", function(event) {
+  console.log("[Service worker] Background Syncing", event);
+  //different events use a switch statement (notices event tag than executes a code)
+  if (event.tag === "sync-new-posts") {
+    event.waitUntil(
+      readAllData("sync-posts").then(function(data) {
+        for (var dt of data) {
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              id: new Date().toISOString(),
+              title: dt.value,
+              location: dt.value,
+              image: "image"
+            });
+          }).then(function(res) {
+            console.log("Sent Data", res);
+            if(res.ok){
+              deleteItemFromData('sync-posts', dt.id);
+            }
+          }).catch(function(err){
+            console.log('Error while sending data',err);
+          });
+        }
+      })
+    );
+  }
+});
+
+self.addEventListener('notificationclick', function(event){
+  var notification = event.notification;
+  var action = event.action;
+
+  console.log(notification);
+
+  if(action === 'confirm') {
+    console.log('COnfirm was chosen');
+    notification.close();
+  } else {
+    console.log(action);
+    event.waitUntil(
+      clients.matchAll()
+        .then(function(clis){
+          var client = clis.find(function(c){
+            return c.visibilityState === 'visible';
+          });
+          if( client !== undefined) {
+            client.navigate('http://localhost:8080');
+            client.focus();
+          } else {
+            clients.openWindow('http://localhost:8080');
+          }
+          notification.close();
+        })
+    );
+    notification.close();
+  }
+});
+
+self.addEventListener('notificationclose', function(event){
+  console.log('Notification was closed', event);
+})
+
+self.addEventListener('push', function(event){
+  console.log('Push Notification recieved', event);
+  var data = {title: 'New!',content:'Something new happened!'};
+  if(event.data){
+    data = JSON.parse(event.data.text());
+  }
+  var options = {
+    body: data.content,
+    icon: '/src/images/icons/app-icon-96x96.png',
+    badge: '/src/images/icons/app-icon-96x96.png'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title,options)
+  )
+});
