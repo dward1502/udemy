@@ -188,25 +188,26 @@ self.addEventListener("sync", function(event) {
   console.log("[Service worker] Background Syncing", event);
   //different events use a switch statement (notices event tag than executes a code)
   if (event.tag === "sync-new-posts") {
+    console.log('[Service WOrker] Syncing new Posts');
     event.waitUntil(
       readAllData("sync-posts").then(function(data) {
         for (var dt of data) {
+          var postData = new FormData();
+          postData.append('id');
+          postData.append('title', dt.title);
+          postData.append('location',dt.location);
+          postData.append('rawLocationLat',dt.rawLocation.lat);
+          postData.append('rawLocationLng',dt.rawLocation.lng);
+          postData.append('file', dt.picturem, dt.id + '.png')
           fetch(url, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            },
-            body: JSON.stringify({
-              id: new Date().toISOString(),
-              title: dt.value,
-              location: dt.value,
-              image: "image"
-            });
+            body: postData
           }).then(function(res) {
             console.log("Sent Data", res);
             if(res.ok){
-              deleteItemFromData('sync-posts', dt.id);
+              res.json().then(function(resData){
+                deleteItemFromData('sync-posts', resData.id);
+              })
             }
           }).catch(function(err){
             console.log('Error while sending data',err);
