@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, TextInput, StyleSheet, Platform, Alert } from 'react-native';
+import { View, ScrollView, Text, TextInput, StyleSheet, Platform, Alert, ActivityIndicator } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,6 +7,8 @@ import HeaderButton from '../../components/UI/HeaderButton';
 import * as productsActions from '../../store/actions/products';
 
 const EditProductScreen = (props) => {
+	const [ isLoading, setIsLoading ] = useState(false);
+	const [ error, setError ] = useState();
 	const prodId = props.navigation.getParam('productId');
 	const editedProduct = useSelector((state) => state.products.userProducts.find((prod) => prod.id === prodId));
 	const dispatch = useDispatch();
@@ -17,16 +19,24 @@ const EditProductScreen = (props) => {
 	const [ price, setPrice ] = useState('');
 	const [ description, setDescription ] = useState(editedProduct ? editedProduct.description : '');
 
-	const submitHandler = useCallback(() => {
+	const submitHandler = useCallback(
+		async () => {
 			if (!titleIsValid) {
 				Alert.alert('Wrong Input!', 'Please check the errors in the form', [ { text: 'Okay' } ]);
 				return;
 			}
-			if (editedProduct) {
-				dispatch(productsActions.updateProduct(prodId, title, description, imageUrl));
-			} else {
-				dispatch(productsActions.createProduct(title, description, imageUrl, +price));
+			setError(null);
+			setIsLoading(true);
+			try {
+				if (editedProduct) {
+					await dispatch(productsActions.updateProduct(prodId, title, description, imageUrl));
+				} else {
+					await dispatch(productsActions.createProduct(title, description, imageUrl, +price));
+				}
+			} catch (err) {
+				setError(err.message);
 			}
+			setIsLoading(false);
 			props.navigation.goBack();
 		},
 		[ dispatch, prodId, title, description, imageUrl, price, titleIsValid ]
