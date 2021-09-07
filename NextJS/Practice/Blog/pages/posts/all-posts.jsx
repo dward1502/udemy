@@ -1,6 +1,7 @@
 import classes from './all-posts.module.scss'
 import PostsGrid from '../../components/posts/posts-grid'
 
+
 function AllPosts(props) {
 
     return (

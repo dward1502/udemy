@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,qCAAqC;EAC5D,GAAG,EAAE,MAAM;EACX,aAAa,EAAE,MAAM;CACtB",
+    "sources": [
+        "posts-grid.module.scss"
+    ],
+    "names": [],
+    "file": "posts-grid.module.css"
+}

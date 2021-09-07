@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACN,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,KAAK;EAChB,MAAM,EAAE,aAAa,CAAC,IAAI;CAC3B;;AAED,AAAA,OAAO,CAAC,EAAE,CAAC;EACT,SAAS,EAAE,aAAa;EACxB,KAAK,EAAE,qBAAqB;EAC5B,UAAU,EAAE,MAAM;CACnB;;AAED,MAAM,EAAE,SAAS,EAAE,KAAK;EACtB,AAAA,OAAO,CAAC,EAAE,CAAC;IACT,SAAS,EAAE,cAAc;GAC1B",
+    "sources": [
+        "featured-posts.module.scss"
+    ],
+    "names": [],
+    "file": "featured-posts.module.css"
+}
