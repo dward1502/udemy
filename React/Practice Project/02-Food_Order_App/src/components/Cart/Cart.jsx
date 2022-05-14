@@ -20,7 +20,7 @@ function Cart(props) {
     <ul className={classes['cart-items']}>
       {cartCTX.items.map((item) => (
         <CartItem
-          kkey={item.id}
+          key={item.id}
           name={item.name}
           amount={item.amount}
           price={item.price}

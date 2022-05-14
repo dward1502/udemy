@@ -22,6 +22,7 @@ const emailReducer = (state, action) => {
     isValid: false,
   };
 };
+
 const passwordReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
     return {
